@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dictionary_application/model/words.dart';
 
+// ignore: must_be_immutable
 class DetailPage extends StatefulWidget {
   Words word;
   DetailPage({required this.word, Key? key}) : super(key: key);

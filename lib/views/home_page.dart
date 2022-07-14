@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(Icons.edit),
                 ),
                 onChanged: (searchResult) {
-                  print("arama sonucu: $searchResult");
+                  debugPrint("arama sonucu: $searchResult");
                   setState(() {
                     searchResult = searchWord;
                   });
