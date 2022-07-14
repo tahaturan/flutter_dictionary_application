@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dictionary_application/model/words.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  Words word;
+  DetailPage({required this.word, Key? key}) : super(key: key);
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -14,7 +16,29 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(
         title: const Text('Detay'),
       ),
-      body: Container(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              widget.word.english,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 40,
+                color: Colors.pink,
+              ),
+            ),
+            Text(
+              widget.word.turkish,
+              style: const TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
