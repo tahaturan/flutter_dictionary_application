@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dictionary_application/database/words_dao.dart';
 import 'package:flutter_dictionary_application/model/words.dart';
 import 'package:flutter_dictionary_application/views/detail.dart';
 
@@ -14,15 +15,12 @@ class _HomePageState extends State<HomePage> {
   String searchWord = "";
 
   Future<List<Words>> showAllWords() async {
-    List<Words> wordsList = [];
+    List<Words> wordsList = await WordsDao.allWords();
+    return wordsList;
+  }
 
-    var w1 = Words(1, "Dog", "Kopek");
-    var w2 = Words(2, "Fish", "Balik");
-    var w3 = Words(3, "Table", "Masa");
-
-    wordsList.add(w1);
-    wordsList.add(w2);
-    wordsList.add(w3);
+  Future<List<Words>> wordSearch(String searchWord) async {
+    List<Words> wordsList = await WordsDao.searcWord(searchWord);
     return wordsList;
   }
 
@@ -39,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                 onChanged: (searchResult) {
                   debugPrint("arama sonucu: $searchResult");
                   setState(() {
-                    searchResult = searchWord;
+                    searchWord = searchResult;
                   });
                 },
               )
@@ -64,7 +62,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: FutureBuilder<List<Words>>(
-        future: showAllWords(),
+        future: search ? wordSearch(searchWord) : showAllWords(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<Words> wordsList = snapshot.data;
